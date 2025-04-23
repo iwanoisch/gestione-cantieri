@@ -62,11 +62,11 @@ export const SimpleTable = <T,>({
                 <div className="hidden md:block">
                     <div className="bg-white shadow-sm rounded-lg border border-gray-200 overflow-hidden">
                         {/* Intestazioni colonne */}
-                        <div className={`grid grid-cols-12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 ${headerClassName}`}>
+                        <div className={`grid grid-cols-12 px-0 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200 ${headerClassName}`}>
                             {columns.map((column) => (
                                 <div
                                     key={`header-${column.key}`}
-                                    className={`${column.width} ${column.headerClassName || ''}`}
+                                    className={`px-6 ${column.width} ${column.headerClassName || ''}`}
                                 >
                                     {column.header}
                                 </div>

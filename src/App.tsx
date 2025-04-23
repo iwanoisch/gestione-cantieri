@@ -6,8 +6,8 @@ import {HomePage} from "./pages/home-page/HomePage.tsx";
 import {Login} from "./pages/login/Login.tsx";
 import {Dashboard} from "./pages/dashboard/Dashboard.tsx";
 import {start} from "./features/init/slice/initSlice.ts";
-import {Project} from "./pages/project/Project.tsx";
 import {useEffect} from "react";
+import {Project} from "./pages/project/Project.tsx";
 
 function App() {
     // Hook di init

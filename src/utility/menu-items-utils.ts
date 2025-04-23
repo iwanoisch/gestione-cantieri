@@ -23,3 +23,20 @@ export const userMenuItems = [
     {name: "Impostazioni", href: "#"},
     {name: "Logout", action: "logout"},
 ];
+
+export const tabsMenuProfile = [
+    {id: 'attivita', label: 'Attività',},
+    {id: 'relazione', label: 'Relazione',},
+    {id: 'budget', label: 'Budget',},
+    {id: 'file', label: 'File',},
+    {id: 'link', label: 'Link',},
+    {id: 'team', label: 'Team',},
+    {id: 'modifica', label: 'Modifica',}
+];
+
+export const tabsMenuActivities = [
+    {id: 'attivita', label: 'Attività',},
+    {id: 'gantt', label: 'Gantt',},
+    {id: 'calendario', label: 'Calendario',},
+
+];
