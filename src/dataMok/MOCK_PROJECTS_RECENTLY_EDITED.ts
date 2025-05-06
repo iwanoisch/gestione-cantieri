@@ -1,6 +1,6 @@
-import {Project} from "../common/simpleCardAction/simpleCardAction.type.ts";
+import {Project} from "../common/simple-card-action/simpleCardAction.type.ts";
 
-export const MOCK_ACTIVITY_RECENTLY_EDITED: Project[] = [
+export const MOCK_PROJECTS_RECENTLY_EDITED: Project[] = [
     {
         id: '1',
         projectName: 'Ristrutturazione Palazzo Storico',
@@ -13,6 +13,10 @@ export const MOCK_ACTIVITY_RECENTLY_EDITED: Project[] = [
 - Installazione di un ascensore vetrato interno con minimo impatto visivo
 Durata stimata: 18 mesi. Budget approvato: €2.850.000. Direzione lavori affidata all'arch. Bianchi.`,
         projectType: 'architecture',
+        dueDate: '2024-12-15',
+        assignedTo: 'Arch. Marco Bianchi',
+        projectId: 'PRJ-001',
+        status: 'In corso'
     },
     {
         id: '2',
@@ -20,6 +24,10 @@ Durata stimata: 18 mesi. Budget approvato: €2.850.000. Direzione lavori affida
         companyPartner: ["Costruzioni Moderne spa", "Progettazione Zero"],
         description: 'Realizzazione di 4 edifici a 7 piani con 120 unità abitative (da monolocali a quadrilocali), parcheggio interrato per 300 posti auto e 5.000 mq di aree verdi con giochi bambini e percorsi jogging. Progetto certificato LEED Gold.',
         projectType: 'planning',
+        dueDate: '2025-06-30',
+        assignedTo: 'Ing. Sofia Rossi',
+        projectId: 'PRJ-002',
+        status: 'Da iniziare'
     },
     {
         id: '3',
@@ -33,6 +41,10 @@ Durata stimata: 18 mesi. Budget approvato: €2.850.000. Direzione lavori affida
 - Barriere antivento e sistema di riscaldamento superficiale anti-ghiaccio
 Tempi di realizzazione: 14 mesi. Fornitura materiali garantita da Acciaierie Venete.`,
         projectType: 'construction',
+        dueDate: '2024-09-30',
+        assignedTo: 'Ing. Luca Ferrari',
+        projectId: 'PRJ-003',
+        status: 'Urgente'
     },
     {
         id: '4',
@@ -40,6 +52,10 @@ Tempi di realizzazione: 14 mesi. Fornitura materiali garantita da Acciaierie Ven
         companyPartner: ["SafeBuild", "TecnoAlarm"],
         description: 'Implementazione sistema sicurezza di ultima generazione comprendente: 8 telecamere PTZ 4K con analisi comportamentale AI, 12 sensori di movimento perimetrali, 5 stazioni SOS con allarme silenzioso, sistema di geofencing per mezzi pesanti, e piattaforma di monitoraggio centralizzata H24/7.',
         projectType: 'safety',
+        dueDate: '2024-05-15',
+        assignedTo: 'Tec. Giovanni Neri',
+        projectId: 'PRJ-004',
+        status: 'Completato'
     },
     {
         id: '5',
@@ -53,6 +69,10 @@ Tempi di realizzazione: 14 mesi. Fornitura materiali garantita da Acciaierie Ven
 - Ottimizzazione rotte con riduzione del 35% dei km percorsi
 Partner tecnologico: Logitech Solutions. Investimento totale: €420.000.`,
         projectType: 'logistics',
+        dueDate: '2024-08-20',
+        assignedTo: 'Log. Manager Paola Verdi',
+        projectId: 'PRJ-005',
+        status: 'In corso'
     },
     {
         id: '6',
@@ -60,6 +80,10 @@ Partner tecnologico: Logitech Solutions. Investimento totale: €420.000.`,
         companyPartner: ["CementiTech", "Edilizia Veloce"],
         description: 'Fornitura di 5.000 tonnellate di cemento ad alta resistenza Rck 50 N/mm² per il progetto "Torri Azzurre". Caratteristiche: classe di esposizione XS3, resistenza ai solfati, basso calore di idratazione. Consegna a lotti settimanali da settembre 2023 a marzo 2024.',
         projectType: 'materials',
+        dueDate: '2023-12-31',
+        assignedTo: 'Resp. Acquisti Carla Bianchi',
+        projectId: 'PRJ-006',
+        status: 'Scaduto'
     },
     {
         id: '7',
@@ -73,5 +97,9 @@ Partner tecnologico: Logitech Solutions. Investimento totale: €420.000.`,
 - 12.000 piante per forestazione urbana
 Certificazioni: LEED Platinum, Well Gold. Tempi: progettazione 8 mesi, costruzione 22 mesi. Costo preventivato: €48 milioni.`,
         projectType: 'architecture',
+        dueDate: '2026-02-28',
+        assignedTo: 'Arch. Elena Romano',
+        projectId: 'PRJ-007',
+        status: 'Da iniziare'
     }
 ];

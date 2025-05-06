@@ -8,6 +8,9 @@ import {Dashboard} from "./pages/dashboard/Dashboard.tsx";
 import {start} from "./features/init/slice/initSlice.ts";
 import {useEffect} from "react";
 import {Project} from "./pages/project/Project.tsx";
+import {Activities} from "./pages/activities/Activities.tsx";
+import {Calendar} from "./pages/calendar/Calendar.tsx";
+import {Projects} from "./pages/projects/Projects.tsx";
 
 function App() {
     // Hook di init
@@ -26,6 +29,9 @@ function App() {
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/dashboard" element={<Dashboard/>}/>
+                    <Route path="/activities" element={<Activities/>}/>
+                    <Route path="/calendar" element={<Calendar/>}/>
+                    <Route path="/projects/" element={<Projects/>}/>
                     <Route path="/project/:projectId" element={<Project/>}/>
                 </Routes>
             </Layout>

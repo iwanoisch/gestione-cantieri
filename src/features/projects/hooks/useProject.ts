@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../../store/store.ts";
 import {mockAddProject, mockDeleteProject, mockEditProject, mockProjectRecentlyEdited} from "../api/project.api.ts";
-import {Project} from "../../../common/simpleCardAction/simpleCardAction.type.ts";
+import {Project} from "../../../common/simple-card-action/simpleCardAction.type.ts";
 import {
     addProject,
     deleteProject,

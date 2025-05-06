@@ -13,7 +13,8 @@ export interface Filters {
     toDate: string;
     duration: string | number;
     assignedTo: string;
-    status: string;
+    status?: string;
+    name?: string;
 }
 
 export type Status = 'Scaduto' | 'Urgente' | 'In corso' | 'Da iniziare' | 'Completato';

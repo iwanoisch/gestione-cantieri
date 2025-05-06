@@ -4,6 +4,7 @@ export interface User {
     password: string
     role: string
     name: string
+    surname: string
     company: string
 }
 

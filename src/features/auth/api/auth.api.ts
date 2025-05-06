@@ -1,4 +1,4 @@
-import {MOCK_USERS} from "../../../dataMok/usersMok.ts";
+import {MOCK_USERS} from "../../../dataMok/MOCK_USERS.ts";
 import {User} from "../slice/auth.type.ts";
 
 export const mockLogin = async (username: string, password: string): Promise<User> => {
@@ -19,7 +19,7 @@ export const mockLogin = async (username: string, password: string): Promise<Use
 
 // Verifica sessione (per mantenere il login)
 export const mockCheckAuth = async (): Promise<User> => {
-    await new Promise(resolve => setTimeout(resolve, 300))
+    await new Promise(resolve => setTimeout(resolve, 400))
 
     // Simula verifica token
     const savedUser = localStorage.getItem('auth_user')

@@ -1,5 +1,5 @@
-import {Project} from "../../../common/simpleCardAction/simpleCardAction.type.ts";
-import {Task} from "../../../common/simpleTable/simpleTable.type.ts";
+import {Project} from "../../../common/simple-card-action/simpleCardAction.type.ts";
+import {Task} from "../../../common/simple-table/simpleTable.type.ts";
 
 export interface ProjectsState {
     projects: Project[] | null;

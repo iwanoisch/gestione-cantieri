@@ -1,8 +1,11 @@
-import {useAppDispatch, useAppSelector} from "../../../store/store.ts";
+import {persistor, useAppDispatch, useAppSelector} from "../../../store/store.ts";
 import {loginFailure, loginStart, loginSuccess, logout, restoreAuth} from "../slice/authSlice.ts";
 import {mockCheckAuth, mockLogin} from "../api/auth.api.ts";
+import storage from "redux-persist/lib/storage";
+import {useAlert} from "../../../common/alert/useAlert.ts";
 
 export const useAuth = () => {
+    const {showAlert} = useAlert();
     const dispatch = useAppDispatch();
     const authState = useAppSelector((state) => state.auth);
 
@@ -24,18 +27,43 @@ export const useAuth = () => {
         }
     }
 
-    const logoutUser = () => {
-        localStorage.removeItem('auth_user')
-        dispatch(logout());
+    const logoutUser = async () => {
+        try {
+            localStorage.removeItem('auth_user');
+            await storage.removeItem('persist:root'); // Pulisce manualmente il storage
+            await persistor.purge(); // Pulisce il storage persistito
+            await persistor.flush(); // Assicura che le modifiche siano applicate
+            dispatch(logout());
+        } catch (error) {
+            showAlert({
+                title: 'Error',
+                type: "error",
+                message: (error as unknown as {message: string}).message,
+            })
+        }
     }
 
     const checkAuth = async () => {
         try {
-            const user = await mockCheckAuth()
-            dispatch(restoreAuth({user}))
-            return true
+            // dispatch(loginStart())
+            // const user = await mockCheckAuth()
+            // dispatch(restoreAuth({user}))
+            // return true
+            const savedUser = localStorage.getItem('auth_user');
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                dispatch(restoreAuth({user}));
+                return true;
+            }
+            const user = await mockCheckAuth();
+            if (user) {
+                localStorage.setItem('auth_user', JSON.stringify(user));
+                dispatch(restoreAuth({user}));
+                return true;
+            }
+            return false;
         } catch {
-            return false
+            return false;
         }
     }
 
@@ -49,7 +77,7 @@ export const useAuth = () => {
 
 
 // import {useAppDispatch, useAppSelector} from "../../../store/store.ts";
-// import {MOCK_USERS} from "../../../dataMok/usersMok.ts";
+// import {MOCK_USERS} from "../../../dataMok/MOCK_USERS.ts";
 // import {logout, setAuth} from "../slice/authSlice.ts";
 //
 // export const useAuth = () => {

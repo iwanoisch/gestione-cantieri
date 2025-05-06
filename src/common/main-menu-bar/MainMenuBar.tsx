@@ -49,7 +49,7 @@ const MainMenuBar = () => {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="h-8 w-auto"
-                                                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                                                src="/images/logo.svg"
                                                 alt="Your Company"
                                             />
                                         </div>
@@ -58,8 +58,8 @@ const MainMenuBar = () => {
                                                 <a
                                                     key={item.name}
                                                     href={item.href}
-                                                    aria-current={ariaCurrent(item.current)}
-                                                    className={classNameCurrent(item.current)}>
+                                                    aria-current={ariaCurrent(location.pathname === item.href)}
+                                                    className={classNameCurrent(location.pathname === item.href)}>
                                                     {item.name}
                                                 </a>
                                             ))}
@@ -208,8 +208,8 @@ const MainMenuBar = () => {
                                             key={item.name}
                                             as="a"
                                             href={item.href}
-                                            className={mobileClassNameCurrent(item.current)}
-                                            aria-current={ariaCurrent(item.current)}
+                                            className={mobileClassNameCurrent(location.pathname === item.href)}
+                                            aria-current={ariaCurrent(location.pathname === item.href)}
                                         >
                                             {item.name}
                                         </DisclosureButton>
@@ -222,8 +222,8 @@ const MainMenuBar = () => {
                                             key={item.name}
                                             as="a"
                                             href={item.href}
-                                            className={mobileClassNameCurrent(item.current)}
-                                            aria-current={ariaCurrent(item.current)}
+                                            className={mobileClassNameCurrent(location.pathname === item.href)}
+                                            aria-current={ariaCurrent(location.pathname === item.href)}
                                         >
                                             {item.name}
                                         </DisclosureButton>
@@ -301,8 +301,8 @@ const MainMenuBar = () => {
                                           <a
                                               key={item.name}
                                               href={item.href}
-                                              className={subMenuClassNameCurrent(item.current)}
-                                              aria-current={ariaCurrent(item.current)}
+                                              className={subMenuClassNameCurrent(location.pathname === item.href)}
+                                              aria-current={ariaCurrent(location.pathname === item.href)}
                                           >
                                               {item.name}
                                           </a>

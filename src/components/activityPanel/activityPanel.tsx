@@ -2,9 +2,10 @@ import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/react";
 import {tabsMenuActivities} from "../../utility/menu-items-utils.ts";
 import {GanttTab} from "../ganttTab/GanttTab.tsx";
 import {ActivityTab} from "../activityTab/ActivityTab.tsx";
+import {SimpleCalendar} from "../../common/simple-calendar/SimpleCalendar.tsx";
 
 
-const ActivityTabContent = () => <div>Contenuto attività del cantiere...</div>;
+const ActivityTabContent = () => <div><SimpleCalendar /></div>;
 const CalendarTabContent = () => <div>Dettaglio costi e preventivi...</div>;
 
 export const ActivityPanel = () => {

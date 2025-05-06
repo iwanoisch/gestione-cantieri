@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {EditProjectPayload, ProjectsState} from "./projects.type.ts";
-import {Project} from "../../../common/simpleCardAction/simpleCardAction.type.ts";
-import {Task} from "../../../common/simpleTable/simpleTable.type.ts";
+import {Project} from "../../../common/simple-card-action/simpleCardAction.type.ts";
+import {Task} from "../../../common/simple-table/simpleTable.type.ts";
 
 
 export const initialState: ProjectsState = {

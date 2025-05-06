@@ -1,4 +1,4 @@
-import {Task} from "../common/simpleTable/simpleTable.type.ts";
+import {Task} from "../common/simple-table/simpleTable.type.ts";
 
 export const activityExpired: Task[] = [
     {

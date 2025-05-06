@@ -1,15 +1,17 @@
 import {useParams} from "react-router-dom";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {CheckBadgeIcon, ChevronDownIcon, PencilSquareIcon, TrashIcon} from "@heroicons/react/24/solid";
-import {TailwindTable} from "../../common/tailwindTable/TailwindTable.tsx";
+import {TailwindTable} from "../../common/tailwind-table/TailwindTable.tsx";
 import {TAB_ACTIVITIES_MOCK} from "../../dataMok/TAB_ACTIVITY_MOCK.ts";
-import {formatDateToLocale} from "../../utility/dateUtils.ts";
+import {formatDateToLocale} from "../../utility/date-utils.ts";
 import {getStatusColor} from "../../utility/simple-table-list-utils.ts";
 import {Activity, Filters} from "./ActivityTab.type.ts";
 import {Modal} from "../../common/modal/Modal.tsx";
+import {useAlert} from "../../common/alert/useAlert.ts";
 
 
 export const ActivityTab = () => {
+    const {showAlert, hideAlert} = useAlert();
     const {projectId} = useParams<{ projectId: string }>();
     const [activities, setActivities] = useState<Activity[]>([]);
     const [filteredActivities, setFilteredActivities] = useState<Activity[]>([]);
@@ -25,7 +27,6 @@ export const ActivityTab = () => {
 
     // Mock data
     useEffect(() => {
-
         setActivities(TAB_ACTIVITIES_MOCK);
         setFilteredActivities(TAB_ACTIVITIES_MOCK);
     }, [projectId]);
@@ -61,9 +62,31 @@ export const ActivityTab = () => {
     };
 
     const handleDelete = (id: number) => {
-        if (window.confirm('Sei sicuro di voler eliminare questa attività?')) {
-            setActivities(prev => prev.filter(activity => activity.id !== id));
-        }
+        // if (window.confirm('Sei sicuro di voler eliminare questa attività?')) {
+        //     setActivities(prev => prev.filter(activity => activity.id !== id));
+        // }
+        const alertId = showAlert({
+            type: 'warning',
+            title: 'Cancellazione',
+            message: 'Stai per eliminare una attività. Sei sicuro?',
+            duration: 0,
+            links: [
+                {
+                    text: 'Annulla',
+                    onClick: () => hideAlert(alertId),
+                    variant: 'secondary'
+                },
+                {
+                    text: 'Conferma',
+                    onClick: () => {
+                        hideAlert(alertId);
+                        setActivities(prev => prev.filter(activity => activity.id !== id))
+                    },
+                    variant: 'primary'
+                }
+            ]
+        });
+
     };
 
     const handleEdit = (activity: Activity) => {
@@ -125,21 +148,21 @@ export const ActivityTab = () => {
 
             render: (item: Activity) => (
                 <>
-                    <div className="flex mb-1 gap-1 items-center ">
+                    <div className="flex mb-1 gap-1 items-center">
                         {isTaskCompleted(item.status)}
-                        <div className='has-tooltip flex flex-row gap-2'>
-                            <span
-                                className='tooltip inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9'>
-                                {item.title}
-                            </span>
+                        <div className='has-tooltip group relative'>
                             <div className="font-medium text-gray-900 truncate max-w-30">
+                                {item.title}
+                            </div>
+                            <div
+                                className="tooltip absolute z-50 hidden group-hover:block min-w-[100px] w-auto px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9">
                                 {item.title}
                             </div>
                         </div>
                     </div>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                        {item.status}
-                    </span>
+                    {item.status}
+                  </span>
                 </>
             )
         },
@@ -148,8 +171,15 @@ export const ActivityTab = () => {
             key: 'assignedTo',
             header: 'Responsabili',
             width: 'col-span-2',
-            render: (item: Activity) => (
-                <div className="text-gray-500">{item.assignedTo}</div>
+            render: (item: Activity) => (<>
+                    <div className='has-tooltip group relative'>
+                        <div
+                            className="tooltip absolute z-50 hidden group-hover:block min-w-[100px] w-auto px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9">
+                            {item.assignedTo}
+                        </div>
+                        <div className="text-gray-500 line-clamp-2 max-w-[200px]">{item.assignedTo}</div>
+                    </div>
+                </>
             )
         },
         {
@@ -158,9 +188,9 @@ export const ActivityTab = () => {
             width: 'col-span-4',
             cellClassName: 'px-3 py-4 text-sm',
             render: (item: Activity) => (<>
-                    <div className='has-tooltip flex flex-row gap-2'>
+                    <div className='has-tooltip group relative'>
                             <span
-                                className='tooltip inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9'>
+                                className="tooltip absolute z-50 hidden group-hover:block min-w-[100px] w-auto px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9">
                                 {item.description}
                             </span>
                         <div className="text-gray-600 line-clamp-2 max-w-[200px]">{item.description}</div>

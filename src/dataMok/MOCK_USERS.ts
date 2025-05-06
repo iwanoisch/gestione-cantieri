@@ -7,6 +7,7 @@ export const MOCK_USERS: User[] = [
         password: 'password',
         role: 'admin',
         name: 'Amministratore',
+        surname: 'Rossi',
         company: 'Edilizia SPA'
     },
     {
@@ -14,7 +15,8 @@ export const MOCK_USERS: User[] = [
         username: 'capocantiere',
         password: 'password',
         role: 'capocantiere',
-        name: 'Mario Rossi',
+        name: 'Mario',
+        surname: 'Verdi',
         company: 'Costruzioni Rossi'
     },
     {
@@ -22,7 +24,8 @@ export const MOCK_USERS: User[] = [
         username: 'progettista',
         password: 'password',
         role: 'progettista',
-        name: 'Luigi Bianchi',
+        name: 'Luigi',
+        surname: 'Bianchi',
         company: 'Progetti Edili'
     }
 ]

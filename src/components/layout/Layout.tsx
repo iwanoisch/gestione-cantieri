@@ -1,5 +1,5 @@
 import {LayoutPagePros} from "./layout.type.ts"
-import MainMenuBar from "../../common/mainMenuBar/MainMenuBar.tsx";
+import MainMenuBar from "../../common/main-menu-bar/MainMenuBar.tsx";
 import {useAuth} from "../../features/auth/hooks/useAuth.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
@@ -28,7 +28,7 @@ export const Layout = ({children}: LayoutPagePros) => {
 
         void verifyAuth();
     }, [location.pathname, navigate, checkAuth, isAuthenticated]); // Aggiungi tutte le dipendenze
-
+console.log('isLoading',isLoading)
     if (isLoading) {
         return (
             <div className="flex h-screen items-center justify-center">

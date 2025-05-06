@@ -1,4 +1,4 @@
-import {PageTitle} from "../../common/pageTitle/PageTitle.tsx";
+import {PageTitle} from "../../common/page-title/PageTitle.tsx";
 import {useParams} from "react-router-dom";
 import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/react";
 import {tabsMenuProfile} from "../../utility/menu-items-utils.ts";

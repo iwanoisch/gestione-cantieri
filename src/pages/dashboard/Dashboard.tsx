@@ -1,18 +1,21 @@
-import {PageTitle} from "../../common/pageTitle/PageTitle.tsx";
-import {SimpleTable} from "../../common/simpleTable/SimpleTable.tsx";
+import {PageTitle} from "../../common/page-title/PageTitle.tsx";
 import {activityExpired} from "../../dataMok/ActivityExpired.ts";
 import {getStatusColor} from "../../utility/simple-table-list-utils.ts";
-import {ColumnDefinition, Task} from "../../common/simpleTable/simpleTable.type.ts";
-import {SimpleCardAction} from "../../common/simpleCardAction/SimpleCardAction.tsx";
-import {Project} from "../../common/simpleCardAction/simpleCardAction.type.ts";
+import {ColumnDefinition, Task} from "../../common/simple-table/simpleTable.type.ts";
+import {SimpleCardAction} from "../../common/simple-card-action/SimpleCardAction.tsx";
+import {Project} from "../../common/simple-card-action/simpleCardAction.type.ts";
 import {useCallback, useEffect, useState} from "react";
 import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useProject} from "../../features/projects/hooks/useProject.ts";
 import {useNavigate} from "react-router-dom";
+import {TailwindTable} from "../../common/tailwind-table/TailwindTable.tsx";
+import {useAlert} from "../../common/alert/useAlert.ts";
 
 
 export const Dashboard = () => {
     const {projects, getProjects, removeProject,} = useProject();
+    const {showAlert, hideAlert} = useAlert();
+
     const navigate = useNavigate();
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
@@ -46,11 +49,41 @@ export const Dashboard = () => {
     };
 
     const handleDelete = async (id: string) => {
-        const result = await removeProject(id);
-        if (result.success) {
-            //TODO Mostra conferma sei sicuro?
-        }
+        const alertId = showAlert({
+            type: 'warning',
+            title: 'Cancellazione',
+            message: 'Stai per eliminare un Progetto. Sei sicuro?',
+            duration: 0,
+            links: [
+                {
+                    text: 'Annulla',
+                    onClick: () => hideAlert(alertId),
+                    variant: 'secondary'
+                },
+                {
+                    text: 'Conferma',
+                    onClick: async () => {
+                        hideAlert(alertId);
+                        await handleRemoveProject(id);
+                    },
+                    variant: 'primary'
+                }
+            ]
+        });
+
     };
+
+    const handleRemoveProject = async (id: string) => {
+        const result = await removeProject(id);
+
+        if (result && (result as unknown as { success: unknown }).success) {
+            showAlert({
+                type: 'success',
+                message: 'Cancellazione avvenuta con successo',
+                duration: 3000
+            });
+        }
+    }
 
     const columns: ColumnDefinition<Task>[] = [
         {
@@ -58,7 +91,17 @@ export const Dashboard = () => {
             header: 'Azienda/Progetto',
             width: 'col-span-3',
             cellClassName: 'border-r border-gray-200 content-center',
-            render: (task) => <div className="text-sm font-medium text-gray-900">{task.companyProject}</div>,
+            render: (task) => (<>
+                <div className='has-tooltip flex flex-row gap-2'>
+                            <span
+                                className='tooltip inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-lg -mt-9'>
+                                {task.companyProject}
+                            </span>
+                    <div className="text-sm font-medium text-gray-900 truncate max-w-30 sm:max-w-full">
+                        {task.companyProject}
+                    </div>
+                </div>
+            </>),
         },
         {
             key: 'activityTitle',
@@ -91,11 +134,10 @@ export const Dashboard = () => {
                                subtitle={'Lista dei task in scadenza e dei progetti in evidenza'}/>
                     <hr className="h-px w-full bg-gray-200 border-0 my-8"/>
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Attività in scadenza</h2>
-                    <SimpleTable
-                        data={activityExpired}
-                        columns={columns}
-                        emptyMessage="Nessun prodotto disponibile"
-                    />
+
+                    <div className="px-4 sm:px-0 bg-gray-50 shadow-sm rounded-lg border border-gray-200">
+                        <TailwindTable headerClassName={'bg-gray-50'} columns={columns} data={activityExpired} maxHeight="380px"/>
+                    </div>
                     <h2 className="text-2xl font-bold text-gray-900 my-8 ">Progetti modificati di recente</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

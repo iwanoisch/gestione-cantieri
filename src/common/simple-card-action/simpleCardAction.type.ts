@@ -1,4 +1,5 @@
 import {colorMap} from "../../utility/simple-card-action-utils.ts";
+import {Status} from "../../components/activityTab/ActivityTab.type.ts";
 
 export interface SimpleCardActionProps {
     projectType?: ProjectType;
@@ -25,4 +26,11 @@ export interface Project {
     companyPartner: string[];
     description: string;
     projectType?: keyof typeof colorMap;
+    dueDate: string;
+    assignedTo: string;
+    projectId: string | undefined;
+    status: Status;
 }
+
+export type NewProject = Omit<Project, 'id'>;
+
